@@ -1,4 +1,171 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Create Account | NexaCapital</title><link rel="stylesheet" href="assets/css/style.css"></head>
-<body class="auth-page"><header class="header"><div class="container nav"><a class="logo" href="index.html"><span>N</span>NexaCapital</a><a href="index.html" class="back-link">← Home</a></div></header>
-<main class="auth-wrap"><form class="form-card auth-card" id="registerForm"><div class="eyebrow">GET STARTED</div><h1>Create demo account</h1><p class="muted">No real funds are requested or processed.</p><div class="two-col"><label>First name<input required name="firstName"></label><label>Last name<input required name="lastName"></label></div><label>Email<input required type="email" name="email" placeholder="you@example.com"></label><label>Country<select required name="country"><option value="">Select country</option><option>United Kingdom</option><option>United States</option><option>Canada</option><option>Australia</option><option>United Arab Emirates</option><option>Other</option></select></label><label>Date of birth<input required type="date" name="dob"></label><label>Password<input required type="password" minlength="8" name="password" placeholder="At least 8 characters"></label><label class="check"><input required type="checkbox"> I understand this is a demo platform.</label><button class="btn btn-primary full" type="submit">Create account</button><p id="registerMessage" class="form-message"></p><div class="form-links"><a href="login.html">Already have an account?</a></div></form></main><script src="assets/js/app.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Create your NexaCapital demo trading account.">
+
+  <title>Create Account | NexaCapital</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container nav">
+
+    <a class="logo" href="index.html">
+      <span>N</span>NexaCapital
+    </a>
+
+    <button class="menu-toggle" aria-label="Open menu">
+      ☰
+    </button>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="markets.html">Markets</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Log in</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main>
+
+<section class="section">
+
+  <div class="container" style="max-width:520px;">
+
+    <div class="eyebrow">
+      NEXACAPITAL
+    </div>
+
+    <h1 style="font-size:42px; margin-bottom:12px;">
+      Create your account
+    </h1>
+
+    <p style="color:var(--muted); margin-bottom:30px;">
+      Create a NexaCapital demo account to access your personal dashboard.
+    </p>
+
+
+    <div class="market-card">
+
+      <form id="registerForm">
+
+        <div style="margin-bottom:18px;">
+
+          <label for="name"
+                 style="display:block; margin-bottom:8px;">
+            Full name
+          </label>
+
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Your full name"
+            autocomplete="name"
+            required
+            style="width:100%; padding:14px; border-radius:8px; border:1px solid var(--border); background:#07111f; color:white; font-size:15px;"
+          >
+
+        </div>
+
+
+        <div style="margin-bottom:18px;">
+
+          <label for="email"
+                 style="display:block; margin-bottom:8px;">
+            Email address
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            style="width:100%; padding:14px; border-radius:8px; border:1px solid var(--border); background:#07111f; color:white; font-size:15px;"
+          >
+
+        </div>
+
+
+        <div style="margin-bottom:22px;">
+
+          <label for="password"
+                 style="display:block; margin-bottom:8px;">
+            Password
+          </label>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="At least 8 characters"
+            autocomplete="new-password"
+            minlength="8"
+            required
+            style="width:100%; padding:14px; border-radius:8px; border:1px solid var(--border); background:#07111f; color:white; font-size:15px;"
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="width:100%; cursor:pointer;"
+        >
+          Create account
+        </button>
+
+      </form>
+
+
+      <p style="color:var(--muted); font-size:13px; margin-top:22px; text-align:center;">
+        Already have an account?
+        <a href="login.html" style="color:var(--green);">
+          Log in
+        </a>
+      </p>
+
+    </div>
+
+
+    <p style="color:var(--muted); font-size:12px; margin-top:20px; text-align:center;">
+      NexaCapital is currently a demo platform. This registration does not
+      create a real-money brokerage account.
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="container footer-bottom" style="margin-top:0;">
+
+    © <span class="year"></span>
+    NexaCapital. Demo platform only.
+
+  </div>
+
+</footer>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
