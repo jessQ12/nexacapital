@@ -351,3 +351,4 @@ function startNexaCapital() {
     });
 
 }
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_YOUR_KEY_HERE";
