@@ -1,99 +1,102 @@
-// NexaCapital Demo Platform
-// Frontend prototype only — no real-money trading.
+// NexaCapital — Supabase authentication
+// Demo/frontend platform. No real-money trading is performed here.
 
-document.addEventListener("DOMContentLoaded", function () {
+const SUPABASE_URL = "https://sjwhhszscigffxxqcwpm.supabase.co";
 
-  /* =========================
-     MOBILE MENU
-  ========================= */
+// Paste your Supabase PUBLISHABLE key between the quotes below.
+// It starts with: sb_publishable_
+const SUPABASE_PUBLISHABLE_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
 
-  const menuToggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
+
+/* -----------------------------
+   Load Supabase
+----------------------------- */
+
+const supabaseScript = document.createElement("script");
+
+supabaseScript.src =
+  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+supabaseScript.onload = startNexaCapital;
+
+document.head.appendChild(supabaseScript);
+
+
+/* -----------------------------
+   Start application
+----------------------------- */
+
+function startNexaCapital() {
+
+  const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+  /* -----------------------------
+     Mobile menu
+  ----------------------------- */
+
+  const menuToggle =
+    document.querySelector(".menu-toggle");
+
+  const navLinks =
+    document.querySelector(".nav-links");
 
   if (menuToggle && navLinks) {
+
     menuToggle.addEventListener("click", function () {
       navLinks.classList.toggle("open");
     });
+
   }
 
 
-  /* =========================
-     FOOTER YEAR
-  ========================= */
+  /* -----------------------------
+     Footer year
+  ----------------------------- */
 
-  const yearElements = document.querySelectorAll(".year");
-
-  yearElements.forEach(function (element) {
+  document.querySelectorAll(".year").forEach(function (element) {
     element.textContent = new Date().getFullYear();
   });
 
 
-  /* =========================
-     DEMO MARKET DATA
-  ========================= */
+  /* -----------------------------
+     Homepage demo price
+  ----------------------------- */
 
-  const markets = [
-    {
-      symbol: "EUR/USD",
-      price: 1.17342,
-      change: 0.18
-    },
-    {
-      symbol: "GBP/USD",
-      price: 1.34681,
-      change: 0.09
-    },
-    {
-      symbol: "XAU/USD",
-      price: 3648.20,
-      change: 0.42
-    },
-    {
-      symbol: "US30",
-      price: 45582.10,
-      change: -0.12
-    },
-    {
-      symbol: "BTC/USD",
-      price: 112540,
-      change: 1.24
-    }
-  ];
+  const heroPrice =
+    document.getElementById("heroPrice");
 
+  const heroChange =
+    document.getElementById("heroChange");
 
-  /* =========================
-     HOMEPAGE DEMO PRICE
-  ========================= */
+  const heroBid =
+    document.getElementById("heroBid");
 
-  const heroPrice = document.getElementById("heroPrice");
-  const heroChange = document.getElementById("heroChange");
-  const heroBid = document.getElementById("heroBid");
-  const heroAsk = document.getElementById("heroAsk");
+  const heroAsk =
+    document.getElementById("heroAsk");
 
   if (heroPrice) {
 
-    let eurusd = 1.17342;
+    let price = 1.17342;
 
     setInterval(function () {
 
-      const movement =
-        (Math.random() - 0.5) * 0.00020;
+      price += (Math.random() - 0.5) * 0.00020;
 
-      eurusd += movement;
-
-      const price =
-        eurusd.toFixed(5);
-
-      heroPrice.textContent = price;
+      heroPrice.textContent =
+        price.toFixed(5);
 
       if (heroBid) {
         heroBid.textContent =
-          (eurusd - 0.00002).toFixed(5);
+          (price - 0.00002).toFixed(5);
       }
 
       if (heroAsk) {
         heroAsk.textContent =
-          (eurusd + 0.00002).toFixed(5);
+          (price + 0.00002).toFixed(5);
       }
 
       if (heroChange) {
@@ -108,218 +111,243 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
     }, 3000);
+
   }
 
 
-  /* =========================
-     TICKER DEMO MOVEMENT
-  ========================= */
-
-  const ticker = document.getElementById("tickerTrack");
-
-  if (ticker) {
-
-    setInterval(function () {
-
-      const spans =
-        ticker.querySelectorAll("span");
-
-      spans.forEach(function (item) {
-
-        const number =
-          item.querySelector("b");
-
-        if (!number) return;
-
-        const original =
-          parseFloat(
-            number.textContent.replace(/,/g, "")
-          );
-
-        if (isNaN(original)) return;
-
-        const movement =
-          original * ((Math.random() - 0.5) * 0.0001);
-
-        const updated =
-          original + movement;
-
-        if (original > 10000) {
-          number.textContent =
-            updated.toFixed(2);
-        } else if (original > 100) {
-          number.textContent =
-            updated.toFixed(2);
-        } else {
-          number.textContent =
-            updated.toFixed(5);
-        }
-
-      });
-
-    }, 4000);
-  }
-
-
-  /* =========================
-     DEMO REGISTER
-  ========================= */
+  /* -----------------------------
+     Registration
+  ----------------------------- */
 
   const registerForm =
     document.getElementById("registerForm");
 
   if (registerForm) {
 
-    registerForm.addEventListener("submit", function (event) {
+    registerForm.addEventListener("submit", async function (event) {
 
       event.preventDefault();
 
       const name =
-        document.getElementById("name")?.value || "";
+        document.getElementById("name")?.value.trim();
 
       const email =
-        document.getElementById("email")?.value || "";
+        document.getElementById("email")?.value.trim();
 
       const password =
-        document.getElementById("password")?.value || "";
+        document.getElementById("password")?.value;
 
       if (!name || !email || !password) {
+
         alert("Please complete all fields.");
+
         return;
       }
 
-      localStorage.setItem(
-        "nexaDemoUser",
-        JSON.stringify({
-          name: name,
-          email: email
-        })
-      );
+      if (password.length < 8) {
 
-      alert(
-        "Demo account created successfully."
-      );
+        alert(
+          "Password must contain at least 8 characters."
+        );
 
-      window.location.href =
-        "dashboard.html";
+        return;
+      }
+
+      const button =
+        registerForm.querySelector("button[type='submit']");
+
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Creating account...";
+      }
+
+      try {
+
+        const { data, error } =
+          await supabase.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+              data: {
+                full_name: name
+              }
+            }
+          });
+
+        if (error) {
+          throw error;
+        }
+
+        if (data.session) {
+
+          alert("Account created successfully.");
+
+          window.location.href =
+            "dashboard.html";
+
+        } else {
+
+          alert(
+            "Account created. Please check your email to confirm your account."
+          );
+
+          window.location.href =
+            "login.html";
+        }
+
+      } catch (error) {
+
+        alert(
+          "Registration failed: " +
+          error.message
+        );
+
+      } finally {
+
+        if (button) {
+          button.disabled = false;
+          button.textContent = "Create account";
+        }
+
+      }
+
     });
+
   }
 
 
-  /* =========================
-     DEMO LOGIN
-  ========================= */
+  /* -----------------------------
+     Login
+  ----------------------------- */
 
   const loginForm =
     document.getElementById("loginForm");
 
   if (loginForm) {
 
-    loginForm.addEventListener("submit", function (event) {
+    loginForm.addEventListener("submit", async function (event) {
 
       event.preventDefault();
 
       const email =
-        document.getElementById("email")?.value || "";
+        document.getElementById("email")?.value.trim();
 
-      if (!email) {
-        alert("Please enter your email.");
+      const password =
+        document.getElementById("password")?.value;
+
+      if (!email || !password) {
+
+        alert("Please enter your email and password.");
+
         return;
       }
 
-      localStorage.setItem(
-        "nexaDemoUser",
-        JSON.stringify({
-          name: "NexaCapital User",
-          email: email
-        })
-      );
+      const button =
+        loginForm.querySelector("button[type='submit']");
 
-      window.location.href =
-        "dashboard.html";
-    });
-  }
-
-
-  /* =========================
-     DASHBOARD USER
-  ========================= */
-
-  const dashboardUser =
-    document.getElementById("dashboardUser");
-
-  if (dashboardUser) {
-
-    const savedUser =
-      localStorage.getItem("nexaDemoUser");
-
-    if (savedUser) {
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Signing in...";
+      }
 
       try {
 
-        const user =
-          JSON.parse(savedUser);
+        const { error } =
+          await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+          });
 
-        dashboardUser.textContent =
-          user.name || "NexaCapital User";
+        if (error) {
+          throw error;
+        }
+
+        window.location.href =
+          "dashboard.html";
 
       } catch (error) {
 
-        dashboardUser.textContent =
-          "NexaCapital User";
+        alert(
+          "Login failed: " +
+          error.message
+        );
+
+      } finally {
+
+        if (button) {
+          button.disabled = false;
+          button.textContent = "Log in";
+        }
+
       }
 
-    } else {
+    });
 
-      dashboardUser.textContent =
-        "NexaCapital User";
-    }
   }
 
 
-  /* =========================
-     DEMO LOGOUT
-  ========================= */
+  /* -----------------------------
+     Dashboard protection
+  ----------------------------- */
 
-  const logoutButtons =
-    document.querySelectorAll("[data-logout]");
+  if (
+    window.location.pathname.endsWith("dashboard.html")
+  ) {
 
-  logoutButtons.forEach(function (button) {
+    protectDashboard();
 
-    button.addEventListener("click", function (event) {
+  }
 
-      event.preventDefault();
 
-      localStorage.removeItem(
-        "nexaDemoUser"
-      );
+  async function protectDashboard() {
+
+    const {
+      data: {
+        user
+      }
+    } = await supabase.auth.getUser();
+
+    if (!user) {
 
       window.location.href =
-        "index.html";
-    });
+        "login.html";
 
-  });
+      return;
+    }
 
+    const dashboardUser =
+      document.getElementById("dashboardUser");
 
-  /* =========================
-     DEMO CONTACT FORM
-  ========================= */
+    if (dashboardUser) {
 
-  const contactForm =
-    document.getElementById("contactForm");
+      dashboardUser.textContent =
+        user.user_metadata?.full_name ||
+        user.email ||
+        "NexaCapital User";
 
-  if (contactForm) {
+    }
 
-    contactForm.addEventListener("submit", function (event) {
-
-      event.preventDefault();
-
-      alert(
-        "Thank you. This contact form is currently a demo."
-      );
-
-      contactForm.reset();
-    });
   }
 
-});
+
+  /* -----------------------------
+     Logout
+  ----------------------------- */
+
+  document.querySelectorAll("[data-logout]")
+    .forEach(function (button) {
+
+      button.addEventListener("click", async function (event) {
+
+        event.preventDefault();
+
+        await supabase.auth.signOut();
+
+        window.location.href =
+          "index.html";
+
+      });
+
+    });
+
+}
