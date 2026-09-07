@@ -1,4 +1,168 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Login | NexaCapital</title><link rel="stylesheet" href="assets/css/style.css"></head>
-<body class="auth-page"><header class="header"><div class="container nav"><a class="logo" href="index.html"><span>N</span>NexaCapital</a><a href="index.html" class="back-link">← Home</a></div></header>
-<main class="auth-wrap"><form class="form-card auth-card" id="loginForm"><div class="eyebrow">WELCOME BACK</div><h1>Log in</h1><p class="muted">Demo website login.</p><label>Email<input required type="email" name="email" placeholder="you@example.com"></label><label>Password<input required type="password" name="password" placeholder="••••••••"></label><button class="btn btn-primary full" type="submit">Log in</button><p id="loginMessage" class="form-message"></p><div class="form-links"><a href="register.html">Create an account</a><a href="index.html">Back home</a></div></form></main><script src="assets/js/app.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Log in to your NexaCapital demo account.">
+
+  <title>Log in | NexaCapital</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container nav">
+
+    <a class="logo" href="index.html">
+      <span>N</span>NexaCapital
+    </a>
+
+    <button class="menu-toggle" aria-label="Open menu">
+      ☰
+    </button>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="markets.html">Markets</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a class="active" href="login.html">Log in</a>
+      <a class="btn btn-primary btn-small" href="register.html">
+        Open account
+      </a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main>
+
+<section class="section">
+
+  <div class="container" style="max-width:520px;">
+
+    <div class="eyebrow">
+      NEXACAPITAL
+    </div>
+
+    <h1 style="font-size:42px; margin-bottom:12px;">
+      Welcome back
+    </h1>
+
+    <p style="color:var(--muted); margin-bottom:30px;">
+      Log in to access your NexaCapital demo dashboard.
+    </p>
+
+
+    <div class="market-card">
+
+      <form id="loginForm">
+
+        <div style="margin-bottom:18px;">
+
+          <label for="email"
+                 style="display:block; margin-bottom:8px;">
+            Email address
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            style="width:100%; padding:14px; border-radius:8px; border:1px solid var(--border); background:#07111f; color:white; font-size:15px;"
+          >
+
+        </div>
+
+
+        <div style="margin-bottom:10px;">
+
+          <label for="password"
+                 style="display:block; margin-bottom:8px;">
+            Password
+          </label>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Your password"
+            autocomplete="current-password"
+            required
+            style="width:100%; padding:14px; border-radius:8px; border:1px solid var(--border); background:#07111f; color:white; font-size:15px;"
+          >
+
+        </div>
+
+
+        <div style="text-align:right; margin-bottom:22px;">
+
+          <a href="#"
+             onclick="alert('Password reset will be added next.'); return false;"
+             style="color:var(--green); font-size:13px;">
+            Forgot password?
+          </a>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="width:100%; cursor:pointer;"
+        >
+          Log in
+        </button>
+
+      </form>
+
+
+      <p style="color:var(--muted); font-size:13px; margin-top:22px; text-align:center;">
+
+        Don't have an account?
+
+        <a href="register.html"
+           style="color:var(--green);">
+          Create one
+        </a>
+
+      </p>
+
+    </div>
+
+
+    <p style="color:var(--muted); font-size:12px; margin-top:20px; text-align:center;">
+      NexaCapital is currently a demo platform.
+      No real-money trading is performed through this website.
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="container footer-bottom" style="margin-top:0;">
+
+    © <span class="year"></span>
+    NexaCapital. Demo platform only.
+
+  </div>
+
+</footer>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
